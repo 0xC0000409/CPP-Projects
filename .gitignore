@@ -5,3 +5,4 @@ Working/
 #Ignore compiled objects
 Debug/
 x64/
+.vs/
