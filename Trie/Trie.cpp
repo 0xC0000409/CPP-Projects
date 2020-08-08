@@ -4,6 +4,8 @@
 */ 
 #include <iostream>
 #include <map>
+#include <iomanip>
+#include "Header.h"
 using namespace std;
 
 struct TrieNode {
@@ -105,26 +107,60 @@ void Proto_func(string s, TrieNode* Node = Root, int i = 0) {
 }
 
 int main() {
-	string text = "dito";
-	string text2 = "dimitri";
-	string text3 = "dito-gvrito";
-	string text4 = "zujka";
-	insert(text);
-	insert(text2);
-	insert(text3);
-	insert(text4);
-	Proto_func("dito-gvrito2132645+654");
-	Proto_func("zujka");
-	Proto_func("dito");
-	Proto_func("dimitri");
-	Proto_func("dito-gvrito");
-	Proto_func("zujka");
-
-	cout << "-----------Search-------------" << endl;
-	cout << search("dito-gvrito") << endl;
-	cout << search("zujka") << endl;
-	cout << search("dito") << endl;
-	cout << search("dimitri") << endl;
-	cout << search("dito-gvrito") << endl;
+	{
+		Trie tr;
+		string text = "Dwight";
+		string text2 = "Dwayne";
+		string text3 = "Michael";
+		string text4 = "Jim";
+		string text5 = "Jimothy";
+		cout << setw(15) << setfill('-') << "insert" << setw(15) << setfill('-') << "" << endl;
+		insert(text);
+		insert(text2);
+		insert(text3);
+		insert(text4);
+		insert(text5);
+		cout << setw(22) << setfill('-') << "insert(class)" << setw(15) << setfill('-') << "" << endl;
+		tr.insert(text);
+		tr.insert(text2);
+		tr.insert(text3);
+		tr.insert(text4);
+		tr.insert(text5);
+		cout << setw(15) << setfill('-') << "search" << setw(15) << setfill('-') << "" << endl;
+		cout << search(text) << endl;
+		cout << search(text3) << endl;
+		cout << search(text5) << endl;
+		cout << search("dwig") << endl;
+		cout << search("Null-IO") << endl;
+		cout << setw(22) << setfill('-') << "search(class)" << setw(15) << setfill('-') << "" << endl;
+		cout << search(text) << endl;
+		cout << search(text3) << endl;
+		cout << search(text5) << endl;
+		cout << search("dwig") << endl;
+		cout << search("Null-IO") << endl;
+		cout << setw(15) << setfill('-') << "erase" << setw(15) << setfill('-') << "" << endl;
+		Proto_func(text2);
+		Proto_func(text3);
+		Proto_func(text4);
+		Proto_func("dwig");
+		Proto_func("Null-IO");
+		cout << setw(22) << setfill('-') << "erase(class)" << setw(15) << setfill('-') << "" << endl;
+		tr.erase(text2);
+		tr.erase(text3);
+		tr.erase(text4);
+		tr.erase("dwig");
+		tr.erase("Null-IO");
+		cout << setw(22) << setfill('-') << "search(again)" << setw(15) << setfill('-') << "" << endl;
+		cout << search(text) << endl;
+		cout << search(text3) << endl;
+		cout << search(text5) << endl;
+		cout << search("dwig") << endl;
+		cout << search("Null-IO") << endl;
+		cout << setw(30) << setfill('-') << "search(class)(again)" << setw(15) << setfill('-') << "" << endl;
+		cout << search(text) << endl;
+		cout << search(text3) << endl;
+		cout << search(text5) << endl;
+		cout << search("dwig") << endl;
+		cout << search("Null-IO") << endl;
+	}
 }
-
