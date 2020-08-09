@@ -16,7 +16,7 @@ void Trie::insert(const std::string& s, std::shared_ptr<Node>&& node) {
 		if (placeHolder->trieMap.empty()) {
 			std::shared_ptr<Node> newNode(new Node);
 			placeHolder->trieMap.insert(std::pair<char, std::shared_ptr<Node>>(s[it], newNode));
-			std::cout << "inserted " << s[it] << " size: " << placeHolder->trieMap.size() << " isWord: " << placeHolder->isWord << std::endl;
+			std::cout << "Inserted \"" << s[it] << "\"" << " with trieMap->size: " << placeHolder->trieMap.size() << ", trieMap->isWord: " << placeHolder->isWord << std::endl;
 			placeHolder = newNode;
 			it++;
 		}
@@ -24,7 +24,7 @@ void Trie::insert(const std::string& s, std::shared_ptr<Node>&& node) {
 			std::shared_ptr<Node> newNode(new Node);
 			if (placeHolder->trieMap.find(s[it]) == placeHolder->trieMap.end()) {
 				placeHolder->trieMap.insert(std::pair<char, std::shared_ptr<Node>>(s[it], newNode));
-				std::cout << "inserted " << s[it] << " size: " << placeHolder->trieMap.size() << " isWord: " << placeHolder->isWord << std::endl;
+				std::cout << "Inserted \"" << s[it] << "\"" << " with trieMap->size: " << placeHolder->trieMap.size() << ", trieMap->isWord: " << placeHolder->isWord << std::endl;
 				placeHolder = newNode;
 				it++;
 			}
@@ -55,13 +55,15 @@ void Trie::erase(const std::string& s, std::shared_ptr<Node>&& node, size_t it) 
 	static bool prefixRemoved = false;
 
 	if (it == s.size() + 1) {
-		std::cout << it << std::endl;
+		std::cout << "Word: \"" << s << "\" has been successfully erased" << std::endl;
 		prefixRemoved = false;
-		return;
 	}
-	else if (node->trieMap.find(s[it]) == node->trieMap.end()) {
+	else if (node->trieMap.find(s[it]) == node->trieMap.end()) {		
 		prefixRemoved = true;
-		//it = s.size() + 1;
+		if (it != s.size() + 1 || !node->isWord) {
+			std::cout << "Word: \"" << s << "\" doesn't exist in Trie" << std::endl;
+			return;
+		}
 	}
 	else {
 		erase(s, move(node->trieMap.at(s[it])), it + 1);
@@ -71,13 +73,11 @@ void Trie::erase(const std::string& s, std::shared_ptr<Node>&& node, size_t it) 
 			node->isWord = false;
 			prefixRemoved = true;
 		}
-
-		if (node->trieMap.size() > 1 && !prefixRemoved) {
+		else if (node->trieMap.size() > 1 && !prefixRemoved) {
 			node->trieMap.erase(s[it]);
 			prefixRemoved = true;
 		}
-
-		if (!prefixRemoved)
+		else if (!prefixRemoved)
 			node->trieMap.erase(s[it]);
 	}
 }
