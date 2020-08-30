@@ -1,6 +1,7 @@
 #Ignore Working directories
 Dummy/
 Working/
+QtWorking/
 
 #Ignore compiled objects
 Debug/

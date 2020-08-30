@@ -113,8 +113,6 @@ std::shared_ptr<typename AVL<T>::Node> AVL<T>::insert(T& value, std::shared_ptr<
 	else if (value > node.get()->data)
 		node.get()->right = insert(value, node.get()->right);
 
-	balance(std::move(node));
-
 	return node;
 }
 
